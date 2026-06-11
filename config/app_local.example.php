@@ -1,5 +1,8 @@
 <?php
 
+use Cake\Database\Connection;
+use Cake\Database\Driver\Sqlite;
+
 use function Cake\Core\env;
 
 /*
@@ -39,41 +42,33 @@ return [
      */
     'Datasources' => [
         'default' => [
-            'host' => 'localhost',
-            /*
-             * CakePHP will use the default DB port based on the driver selected
-             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
-             * the following line and set the port accordingly
-             */
-            //'port' => 'non_standard_port_number',
-
-            'username' => 'my_app',
-            'password' => 'secret',
-
-            'database' => 'my_app',
-            /*
-             * If not using the default 'public' schema with the PostgreSQL driver
-             * set it here.
-             */
-            //'schema' => 'myapp',
+            'className' => Connection::class,
+            'driver' => Sqlite::class,
+            'persistent' => false,
 
             /*
-             * You can use a DSN string to set the entire configuration
+             * Path to the SQLite database file. Overridden by the DATABASE_URL
+             * env var when set (see config/.env), e.g.
+             * sqlite:///full/path/to/app.sqlite
              */
+            'database' => ROOT . DS . 'data' . DS . 'app.sqlite',
             'url' => env('DATABASE_URL', null),
+
+            // SQLite does not enforce foreign keys (incl. ON DELETE CASCADE)
+            // unless this pragma is enabled per connection.
+            'init' => ['PRAGMA foreign_keys = ON'],
         ],
 
         /*
          * The test connection is used during the test suite.
          */
         'test' => [
-            'host' => 'localhost',
-            //'port' => 'non_standard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'test_myapp',
-            //'schema' => 'myapp',
-            'url' => env('DATABASE_TEST_URL', 'sqlite://127.0.0.1/tmp/tests.sqlite'),
+            'className' => Connection::class,
+            'driver' => Sqlite::class,
+            'persistent' => false,
+            'database' => ROOT . DS . 'tmp' . DS . 'tests.sqlite',
+            'url' => env('DATABASE_TEST_URL', null),
+            'init' => ['PRAGMA foreign_keys = ON'],
         ],
     ],
 

@@ -55,10 +55,9 @@ return function (RouteBuilder $routes): void {
          * its action called 'display', and we pass a param to select the view file
          * to use (in this case, templates/Pages/home.php)...
          */
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-        $builder->connect('/pages/*', 'Pages::display');
+        
         // Diferente do Laravel eu preciso colocar o nome do controller e da action, não é possível colocar a url diretamente
-        $builder->connect('/series', ['controller' => 'Series', 'action' => 'index']);
+        $builder->connect('/', ['controller' => 'Series', 'action' => 'index']);
 
         /*
          * Connect catchall routes for all controllers.

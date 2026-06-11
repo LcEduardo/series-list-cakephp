@@ -10,11 +10,7 @@ class SeriesController extends AppController
 {
     public function index()
     {
-        $series = [
-            ['id' => 1, 'name' => 'Breaking Bad'],
-            ['id' => 2, 'name' => 'Game of Thrones'],
-            ['id' => 3, 'name' => 'Stranger Things'],
-        ];
+        $series = $this->Series->getAllSeries();
 
         $this->set(compact('series'));
     }
