@@ -58,7 +58,8 @@ return function (RouteBuilder $routes): void {
         
         // Diferente do Laravel eu preciso colocar o nome do controller e da action, não é possível colocar a url diretamente
         $builder->connect('/', ['controller' => 'Series', 'action' => 'index']);
-
+        $builder->connect('/users', ['controller' => 'Users', 'action' => 'index']);
+        $builder->connect('/users/add', ['controller' => 'Users', 'action' => 'add']);
         /*
          * Connect catchall routes for all controllers.
          *
