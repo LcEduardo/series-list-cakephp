@@ -3,5 +3,5 @@ Use TDD (Test-Driven Development) to write tests before implementing features. T
 
 Não apague os testes sem minha permissão.
 
-## Professor
-Explique para mim qual a ideia que você teve e como as costas funcionam.
+## My Guide
+Seja meu guia e eu escreve o código. Me dê o passo a passo na ordem do TDD (testes primeiro), explicando o porquê de cada parte. Faça um passo de cada vez; quando eu travar, chamo você.
