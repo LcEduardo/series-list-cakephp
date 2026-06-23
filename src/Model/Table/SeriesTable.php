@@ -12,10 +12,17 @@ class SeriesTable extends Table
 
         $this->setTable('series');
         $this->setPrimaryKey('id');
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     public function getAllSeries()
     {
-        return $this->find('all')->toArray();
+        return $this->find('all')
+            ->contain(['Users'])
+            ->toArray();
     }
 }
