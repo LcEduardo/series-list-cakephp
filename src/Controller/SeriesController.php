@@ -14,4 +14,18 @@ class SeriesController extends AppController
 
         $this->set(compact('series'));
     }
+
+    public function add()
+    {   
+        $serie = $this->Series->newEmptyEntity();
+
+        if ($this->request->is('post')) {
+            $serie = $this->Series->patchEntity($serie, $this->request->getData());
+
+            if ($this->Series->save($serie)) {
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        $this->set(compact('series'));
+    }
 }

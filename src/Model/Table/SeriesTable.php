@@ -2,7 +2,9 @@
 
 namespace App\Model\Table;
 
+use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\Validation\Validator;
 
 class SeriesTable extends Table
 {
@@ -17,6 +19,27 @@ class SeriesTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
+
+        $this->belongsTo('Genre', [
+            'foreignKey' => 'genre_id',
+            'joinType' => 'INNER',
+        ]);
+    }
+
+    public function buildRules(RulesChecker $rules): RulesChecker
+    {
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['genre_id'], 'Genre')); 
+
+        return $rules;
+    }
+
+    public function validationDefault(Validator $validator): Validator
+    {
+        $validator
+            ->notEmptyString('title', 'O título é obrigatório.');
+
+        return $validator;
     }
 
     public function getAllSeries()
