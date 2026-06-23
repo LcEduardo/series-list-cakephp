@@ -96,8 +96,31 @@ bin/cake server -p 8765
 
 ## Testes
 
+Os testes usam PHPUnit e um banco **SQLite separado** (`tmp/tests.sqlite`),
+recriado a partir das migrations a cada execução.
+
+### Rodar toda a suíte
+
 ```bash
-bin/cake test
+composer test
 # ou
 vendor/bin/phpunit
 ```
+
+### Rodar um arquivo específico
+
+```bash
+vendor/bin/phpunit tests/TestCase/Controller/SeriesControllerTest.php
+```
+
+### Rodar um único teste (método)
+
+Use `--filter` com o nome do método:
+
+```bash
+vendor/bin/phpunit --filter testIndex tests/TestCase/Controller/SeriesControllerTest.php
+```
+
+> No Windows/Herd, chame o Composer pelo caminho do binário se `composer` não
+> estiver no PATH, por exemplo:
+> `"C:/Users/SeuUsuario/.config/herd/bin/composer.bat" test`
