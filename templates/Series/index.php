@@ -1,4 +1,8 @@
-<h2>List</h2>
+<div style="display: flex; align-items: center; justify-content: space-between;">
+    <h2>List</h2>
+    <?= $this->Html->link('Add Series', ['action' => 'add'], ['class' => 'button']) ?>
+</div>
+
 <table>
     <thead>
         <tr>

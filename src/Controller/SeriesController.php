@@ -21,11 +21,17 @@ class SeriesController extends AppController
 
         if ($this->request->is('post')) {
             $serie = $this->Series->patchEntity($serie, $this->request->getData());
+            $serie->user_id = 1;
 
             if ($this->Series->save($serie)) {
                 return $this->redirect(['action' => 'index']);
             }
         }
-        $this->set(compact('series'));
+
+        $genres = $this->Series->Genre->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'description',
+        ]);
+        $this->set(compact('serie', 'genres'));
     }
 }
